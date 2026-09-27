@@ -23,6 +23,18 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 
 See [Vite Configuration Reference](https://vite.dev/config/).
 
+## Deployment
+
+`npm run build` generates prerendered pages in `dist/`, including
+`dist/kalkulator-dmc.html`, social preview images, `robots.txt` and `sitemap.xml`.
+Deploy the complete `dist/` directory to `https://caravaning.zgrana.pl`.
+
+Configure the host to map the extensionless URL `/kalkulator-dmc` to
+`/kalkulator-dmc.html` and return `404.html` with HTTP status 404 for unknown
+paths. Do not rewrite unknown URLs to the homepage HTML: that would give crawlers
+the wrong canonical page and a false 200 response. Configure HTTPS and redirect
+any alternate hostnames to the canonical domain.
+
 ## Project Setup
 
 ```sh

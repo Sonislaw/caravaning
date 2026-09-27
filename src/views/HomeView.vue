@@ -3,6 +3,7 @@ import type { Component } from 'vue'
 import { RouterLink } from 'vue-router'
 import { ArrowRight, Fuel, Map, ReceiptText, Route, ShieldCheck, Weight } from '@lucide/vue'
 import { Button } from '@/components/ui/button'
+import { siteName, siteUrl, usePageSeo } from '@/seo/usePageSeo'
 
 interface ToolItem {
   title: string
@@ -14,7 +15,7 @@ interface ToolItem {
 const tools: ToolItem[] = [
   {
     title: 'Kalkulator DMC',
-    description: 'Sprawdź dopuszczalną masę zestawu i orientacyjne wymagane uprawnienia.',
+    description: 'Dodaj DMC samochodu i przyczepy, aby obliczyć łączną wartość zestawu.',
     icon: Weight,
     to: '/kalkulator-dmc',
   },
@@ -39,6 +40,26 @@ const tools: ToolItem[] = [
     icon: Route,
   },
 ]
+
+usePageSeo('home', {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: siteName,
+      url: siteUrl,
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      name: siteName,
+      url: siteUrl,
+      inLanguage: 'pl-PL',
+      publisher: { '@id': `${siteUrl}/#organization` },
+    },
+  ],
+})
 </script>
 
 <template>

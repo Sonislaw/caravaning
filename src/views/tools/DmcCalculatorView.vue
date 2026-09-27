@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { ArrowLeft, Caravan, RotateCcw, Scale } from '@lucide/vue'
 import { RouterLink } from 'vue-router'
 import { Button } from '@/components/ui/button'
+import { siteName, siteUrl, usePageSeo } from '@/seo/usePageSeo'
 
 const carDmc = ref<number | string>('')
 const trailerDmc = ref<number | string>('')
@@ -14,17 +15,115 @@ const formattedTotal = computed(() =>
   new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 0 }).format(totalDmc.value),
 )
 
-const licenseGuidance = computed(() => {
-  if (!hasBothValues.value) return ''
-  if (totalDmc.value <= 3500) return 'Możliwe prowadzenie z prawem jazdy kategorii B.'
-  if (totalDmc.value <= 4250) return 'Sprawdź wymagania dla B96.'
-  return 'Prawdopodobnie wymagane będzie B+E.'
+const licenseRecommendation = computed(() => {
+  if (!hasBothValues.value) {
+    return {
+      category: '—',
+      explanation: 'Uzupełnij DMC obu pojazdów, aby zobaczyć podpowiedź.',
+    }
+  }
+
+  const carMass = Number(carDmc.value)
+  const trailerMass = Number(trailerDmc.value)
+
+  if (carMass > 3500 || trailerMass > 3500) {
+    return {
+      category: 'Poza zakresem',
+      explanation:
+        'DMC jednego z pojazdów przekracza 3500 kg. Sprawdź wymagania dla odpowiedniej kategorii.',
+    }
+  }
+
+  if (trailerMass <= 750) {
+    return {
+      category: 'B',
+      explanation: 'Orientacyjnie: samochód do 3500 kg z przyczepą lekką do 750 kg.',
+    }
+  }
+
+  if (totalDmc.value <= 3500) {
+    return {
+      category: 'B',
+      explanation: 'Orientacyjnie: łączne DMC zestawu nie przekracza 3500 kg.',
+    }
+  }
+
+  if (totalDmc.value <= 4250) {
+    return {
+      category: 'B96',
+      explanation:
+        'Orientacyjnie: przyczepa cięższa niż 750 kg, a łączne DMC nie przekracza 4250 kg.',
+    }
+  }
+
+  return {
+    category: 'B+E',
+    explanation: 'Orientacyjnie dla zestawu powyżej 4250 kg z przyczepą o DMC do 3500 kg.',
+  }
 })
 
 const resetCalculator = () => {
   carDmc.value = ''
   trailerDmc.value = ''
 }
+
+const frequentlyAskedQuestions = [
+  {
+    question: 'Jak obliczyć łączne DMC samochodu i przyczepy?',
+    answer:
+      'Dodaj DMC samochodu i DMC przyczepy odczytane z dokumentów pojazdów. Kalkulator pokazuje wyłącznie arytmetyczną sumę tych dwóch wartości.',
+  },
+  {
+    question: 'Czy wynik oznacza rzeczywistą masę zestawu podczas podróży?',
+    answer:
+      'Nie. To suma dopuszczalnych mas całkowitych, a nie rzeczywista masa samochodu, przyczepy ani załadowanego zestawu.',
+  },
+  {
+    question: 'Jak kalkulator orientacyjnie dobiera kategorię prawa jazdy?',
+    answer:
+      'Podpowiedź uwzględnia DMC samochodu, DMC przyczepy i ich sumę. Rozróżnia przyczepę lekką do 750 kg, zakres B96 do 4250 kg oraz orientacyjny próg B+E powyżej 4250 kg.',
+  },
+  {
+    question: 'Czy podpowiedź kategorii prawa jazdy jest wiążąca?',
+    answer:
+      'Nie. To orientacyjna informacja oparta na DMC, a nie potwierdzenie uprawnień. Sprawdź aktualne przepisy, dokumenty pojazdów oraz dopuszczalne masy przyczepy dla samochodu.',
+  },
+  {
+    question: 'Kiedy wynik jest poza zakresem kalkulatora?',
+    answer:
+      'Kalkulator nie określa kategorii, gdy DMC samochodu lub przyczepy przekracza 3500 kg. W takiej sytuacji sprawdź wymagania dla kategorii obejmujących cięższe pojazdy i zestawy.',
+  },
+  {
+    question: 'Gdzie sprawdzić wymagania dotyczące prawa jazdy?',
+    answer:
+      'Sprawdź aktualne brzmienie art. 6 ustawy o kierujących pojazdami oraz dane pojazdów w ich dokumentach. W razie wątpliwości skonsultuj się z właściwym urzędem.',
+  },
+]
+
+usePageSeo('dmc', {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Kalkulator DMC zestawu',
+      description: 'Bezpłatny kalkulator sumujący DMC samochodu i przyczepy kempingowej.',
+      url: `${siteUrl}/kalkulator-dmc`,
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Any',
+      inLanguage: 'pl-PL',
+      publisher: { '@type': 'Organization', name: siteName, url: siteUrl },
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'PLN' },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: frequentlyAskedQuestions.map(({ question, answer }) => ({
+        '@type': 'Question',
+        name: question,
+        acceptedAnswer: { '@type': 'Answer', text: answer },
+      })),
+    },
+  ],
+})
 </script>
 
 <template>
@@ -46,7 +145,7 @@ const resetCalculator = () => {
         Kalkulator DMC zestawu
       </h1>
       <p class="mt-3 text-base leading-7 text-muted-foreground">
-        Sprawdź całkowitą dopuszczalną masę zestawu oraz wymagane uprawnienia.
+        Oblicz łączną dopuszczalną masę całkowitą samochodu i przyczepy kempingowej.
       </p>
     </div>
 
@@ -114,8 +213,8 @@ const resetCalculator = () => {
         </form>
 
         <p class="mt-6 border-t border-border pt-5 text-xs leading-5 text-muted-foreground">
-          Wynik jest orientacyjny. Przed podróżą sprawdź dopuszczalne masy pojazdów i aktualne
-          wymagania dotyczące uprawnień.
+          Podpowiedź jest orientacyjna i nie uwzględnia wszystkich ograniczeń pojazdu ani sytuacji
+          prawnej kierowcy.
         </p>
       </section>
 
@@ -152,12 +251,74 @@ const resetCalculator = () => {
         </div>
 
         <div class="border-t border-white/20 pt-5">
-          <p class="text-xs font-semibold uppercase text-emerald-100">Orientacyjne uprawnienia</p>
-          <p class="mt-2 text-sm leading-6 text-white/90">
-            {{ licenseGuidance || 'Wynik pojawi się po uzupełnieniu obu pól.' }}
+          <p class="text-xs font-semibold uppercase text-emerald-100">
+            Orientacyjny rodzaj prawa jazdy
           </p>
+          <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <p class="font-heading text-3xl font-bold tracking-normal text-white">
+              {{ licenseRecommendation.category }}
+            </p>
+            <p class="max-w-sm text-sm leading-6 text-white/85">
+              {{ licenseRecommendation.explanation }}
+            </p>
+          </div>
         </div>
       </section>
     </div>
+
+    <aside
+      class="mt-4 border-l-4 border-amber-500 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950"
+    >
+      <strong>Wynik orientacyjny, nie porada prawna.</strong>
+      Potwierdź kategorię w aktualnych przepisach i sprawdź dokumenty oraz ograniczenia techniczne
+      samochodu i przyczepy.
+    </aside>
+
+    <section class="mt-12 grid gap-8 border-t border-border pt-10 md:grid-cols-2">
+      <div>
+        <h2 class="font-heading text-xl font-semibold tracking-normal">
+          Jak obliczyć łączne DMC zestawu?
+        </h2>
+        <p class="mt-3 text-sm leading-6 text-muted-foreground">
+          Wpisz DMC samochodu oraz DMC przyczepy z ich dokumentów rejestracyjnych. Kalkulator dodaje
+          obie wartości i podaje wynik w kilogramach. DMC to dopuszczalna masa całkowita, a nie
+          rzeczywista masa pojazdu w danej podróży.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-heading text-xl font-semibold tracking-normal">
+          Wynik a uprawnienia kierowcy
+        </h2>
+        <p class="mt-3 text-sm leading-6 text-muted-foreground">
+          Kalkulator podaje orientacyjną kategorię na podstawie DMC samochodu, DMC przyczepy i sumy
+          zestawu. Sama podpowiedź nie wystarcza do potwierdzenia uprawnień; uwzględnij parametry
+          obu pojazdów i aktualne przepisy.
+        </p>
+        <a
+          href="https://eli.gov.pl/api/acts/DU/2024/1210/text.html"
+          target="_blank"
+          rel="noreferrer"
+          class="mt-3 inline-flex text-sm font-medium text-primary underline underline-offset-4"
+        >
+          Ustawa o kierujących pojazdami, art. 6
+        </a>
+        <p class="mt-2 text-xs leading-5 text-muted-foreground">
+          Przed wyjazdem sprawdź aktualny tekst przepisów oraz wartości i ograniczenia wpisane w
+          dokumentach pojazdów.
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq-heading" class="mt-12 border-t border-border pt-10">
+      <h2 id="faq-heading" class="font-heading text-2xl font-bold tracking-normal">
+        Najczęstsze pytania o DMC zestawu
+      </h2>
+      <div class="mt-5 divide-y divide-border border-y border-border">
+        <details v-for="item in frequentlyAskedQuestions" :key="item.question" class="py-4">
+          <summary class="cursor-pointer font-medium">{{ item.question }}</summary>
+          <p class="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">{{ item.answer }}</p>
+        </details>
+      </div>
+    </section>
   </div>
 </template>

@@ -1,0 +1,23 @@
+{
+  "siteUrl": "https://caravaning.zgrana.pl",
+  "siteName": "Caravaning Tools",
+  "language": "pl-PL",
+  "pages": [
+    {
+      "key": "home",
+      "path": "/",
+      "title": "Caravaning Tools - kalkulatory i planowanie podróży",
+      "description": "Praktyczne narzędzia dla caravaningowców: kalkulator DMC zestawu, planowanie kosztów podróży, spalania i winiet. Przygotuj się do drogi.",
+      "socialImage": "/og/caravaning-tools.png",
+      "socialImageAlt": "Caravaning Tools - narzędzia dla podróżujących kamperem i z przyczepą"
+    },
+    {
+      "key": "dmc",
+      "path": "/kalkulator-dmc",
+      "title": "Kalkulator DMC samochodu i przyczepy - Caravaning Tools",
+      "description": "Oblicz łączne DMC samochodu i przyczepy kempingowej. Zobacz, co oznacza wynik i dlaczego sama suma nie przesądza o wymaganej kategorii prawa jazdy.",
+      "socialImage": "/og/kalkulator-dmc.png",
+      "socialImageAlt": "Kalkulator DMC zestawu samochodu i przyczepy"
+    }
+  ]
+}
