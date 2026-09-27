@@ -12,6 +12,11 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/views/tools/DmcCalculatorView.vue'),
   },
   {
+    path: '/kalkulator-spalania',
+    name: 'kalkulator-spalania',
+    component: () => import('@/views/tools/FuelCalculatorView.vue'),
+  },
+  {
     path: '/polityka-prywatnosci',
     name: 'polityka-prywatnosci',
     component: () => import('@/views/PrivacyPolicyView.vue'),

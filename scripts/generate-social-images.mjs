@@ -12,6 +12,10 @@ const imageCopy = {
     title: ['Kalkulator DMC', 'zestawu'],
     subtitle: 'Samochód + przyczepa kempingowa',
   },
+  consumption: {
+    title: ['Kalkulator', 'spalania'],
+    subtitle: 'Paliwo, koszt trasy i tankowania',
+  },
   privacy: {
     title: ['Polityka', 'prywatności'],
     subtitle: 'Prywatność w Caravaning Tools',

@@ -26,8 +26,9 @@ const tools: ToolItem[] = [
   },
   {
     title: 'Kalkulator spalania',
-    description: 'Policz zużycie paliwa i koszt przejechania zaplanowanej trasy.',
+    description: 'Oblicz paliwo, koszt przejazdu i szacowaną liczbę tankowań.',
     icon: Fuel,
+    to: '/kalkulator-spalania',
   },
   {
     title: 'Kalkulator winiet',

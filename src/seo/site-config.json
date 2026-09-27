@@ -20,6 +20,14 @@
       "socialImageAlt": "Kalkulator DMC zestawu samochodu i przyczepy"
     },
     {
+      "key": "consumption",
+      "path": "/kalkulator-spalania",
+      "title": "Kalkulator spalania i kosztu paliwa - Caravaning Tools",
+      "description": "Oblicz zużycie paliwa oraz koszt trasy w jedną i w obie strony. Sprawdź szacowaną liczbę tankowań na podstawie pojemności baku.",
+      "socialImage": "/og/kalkulator-spalania.png",
+      "socialImageAlt": "Kalkulator spalania i kosztów podróży Caravaning Tools"
+    },
+    {
       "key": "privacy",
       "path": "/polityka-prywatnosci",
       "title": "Polityka Prywatności - Caravaning Tools",
