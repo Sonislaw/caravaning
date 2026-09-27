@@ -60,6 +60,22 @@ const createSvg = (page) => {
 </svg>`
 }
 
+const createAppIconSvg =
+  () => `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#17362f"/>
+  <path d="M72 359c85-29 142-37 217-18 51 13 92 39 148 39v84H72z" fill="#315848"/>
+  <path d="M72 405c83-21 139-18 213-2 51 11 94 20 152 16v45H72z" fill="#547662"/>
+  <path d="M131 259h173c19 0 35 15 35 34v89H96v-88c0-19 16-35 35-35z" fill="#f5f4ec"/>
+  <path d="M159 259v-67h99l58 67z" fill="#f5f4ec"/>
+  <path d="M178 207h69v38h-69z" fill="#547d75"/>
+  <path d="M260 207h18l34 38h-52z" fill="#547d75"/>
+  <circle cx="157" cy="384" r="36" fill="#14251f"/>
+  <circle cx="157" cy="384" r="16" fill="#d8dfcb"/>
+  <circle cx="322" cy="384" r="36" fill="#14251f"/>
+  <circle cx="322" cy="384" r="16" fill="#d8dfcb"/>
+  <path d="M373 171a45 45 0 1 1-90 0 45 45 0 0 1 90 0" fill="#d9c68c"/>
+</svg>`
+
 const outputDirectory = resolve('public/og')
 await mkdir(outputDirectory, { recursive: true })
 
@@ -68,4 +84,18 @@ for (const page of siteConfig.pages) {
   await sharp(Buffer.from(createSvg(page)))
     .png({ compressionLevel: 9 })
     .toFile(outputPath)
+}
+
+const pwaIconDirectory = resolve('public/pwa')
+await mkdir(pwaIconDirectory, { recursive: true })
+
+for (const [fileName, size] of [
+  ['icon-192.png', 192],
+  ['icon-512.png', 512],
+  ['icon-maskable-512.png', 512],
+]) {
+  await sharp(Buffer.from(createAppIconSvg()))
+    .resize(size, size)
+    .png({ compressionLevel: 9 })
+    .toFile(join(pwaIconDirectory, fileName))
 }

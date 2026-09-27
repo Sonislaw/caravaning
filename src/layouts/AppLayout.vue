@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
 import { RouterView } from 'vue-router'
 import AppFooter from '@/components/AppFooter.vue'
 import AppHeader from '@/components/AppHeader.vue'
+
+useHead({ htmlAttrs: { lang: 'pl' } })
 </script>
 
 <template>
