@@ -16,7 +16,7 @@ usePageSeo('privacy', {
 </script>
 
 <template>
-  <article class="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+  <article class="mx-auto max-w-4xl px-4 py-7 sm:px-6 sm:py-10 lg:px-8">
     <RouterLink
       to="/"
       class="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -50,7 +50,9 @@ usePageSeo('privacy', {
       </section>
 
       <section class="py-7">
-        <h2 class="font-heading text-xl font-semibold tracking-normal">2. Zakres przetwarzanych danych</h2>
+        <h2 class="font-heading text-xl font-semibold tracking-normal">
+          2. Zakres przetwarzanych danych
+        </h2>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
           Podczas korzystania ze strony mogą być przetwarzane podstawowe informacje techniczne
           związane z wyświetlaniem strony internetowej, takie jak:
@@ -69,7 +71,9 @@ usePageSeo('privacy', {
       </section>
 
       <section class="py-7">
-        <h2 class="font-heading text-xl font-semibold tracking-normal">3. Cloudflare Web Analytics</h2>
+        <h2 class="font-heading text-xl font-semibold tracking-normal">
+          3. Cloudflare Web Analytics
+        </h2>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
           Serwis korzysta z usługi Cloudflare Web Analytics dostarczanej przez Cloudflare, Inc.
         </p>
@@ -92,13 +96,14 @@ usePageSeo('privacy', {
       <section class="py-7">
         <h2 class="font-heading text-xl font-semibold tracking-normal">4. Pliki cookies</h2>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Strona nie wykorzystuje plików cookies do celów analitycznych realizowanych przez Cloudflare
-          Web Analytics.
+          Strona nie wykorzystuje plików cookies do celów analitycznych realizowanych przez
+          Cloudflare Web Analytics.
         </p>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
           Niezależnie od powyższego infrastruktura Cloudflare może wykorzystywać techniczne pliki
-          cookies niezbędne do zapewnienia bezpieczeństwa, ochrony przed nadużyciami lub prawidłowego
-          działania usług sieciowych. Szczegółowe informacje znajdują się w dokumentacji Cloudflare.
+          cookies niezbędne do zapewnienia bezpieczeństwa, ochrony przed nadużyciami lub
+          prawidłowego działania usług sieciowych. Szczegółowe informacje znajdują się w
+          dokumentacji Cloudflare.
         </p>
       </section>
 
@@ -108,7 +113,8 @@ usePageSeo('privacy', {
           Dostawcą infrastruktury technicznej oraz narzędzia analitycznego jest Cloudflare, Inc.
         </p>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Informacje dotyczące sposobu przetwarzania danych przez Cloudflare można znaleźć na stronie:
+          Informacje dotyczące sposobu przetwarzania danych przez Cloudflare można znaleźć na
+          stronie:
         </p>
         <a
           href="https://www.cloudflare.com/privacypolicy"
@@ -132,10 +138,12 @@ usePageSeo('privacy', {
       </section>
 
       <section class="py-7">
-        <h2 class="font-heading text-xl font-semibold tracking-normal">7. Zmiany Polityki Prywatności</h2>
+        <h2 class="font-heading text-xl font-semibold tracking-normal">
+          7. Zmiany Polityki Prywatności
+        </h2>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Polityka Prywatności może być aktualizowana w przypadku zmian funkcjonalności serwisu, zmian
-          prawnych lub zmian dostawców usług wykorzystywanych przez stronę.
+          Polityka Prywatności może być aktualizowana w przypadku zmian funkcjonalności serwisu,
+          zmian prawnych lub zmian dostawców usług wykorzystywanych przez stronę.
         </p>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
           Aktualna wersja dokumentu jest zawsze publikowana pod adresem:
@@ -151,8 +159,8 @@ usePageSeo('privacy', {
       <section class="py-7">
         <h2 class="font-heading text-xl font-semibold tracking-normal">8. Kontakt</h2>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          W sprawach związanych z funkcjonowaniem serwisu można skontaktować się z administratorem za
-          pośrednictwem danych kontaktowych publikowanych w serwisie.
+          W sprawach związanych z funkcjonowaniem serwisu można skontaktować się z administratorem
+          za pośrednictwem danych kontaktowych publikowanych w serwisie.
         </p>
       </section>
     </div>
