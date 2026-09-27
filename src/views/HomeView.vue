@@ -5,9 +5,6 @@ import {
   ArrowRight,
   ClipboardCheck,
   Fuel,
-  Map,
-  ReceiptText,
-  Route,
   ShieldCheck,
   Weight,
 } from '@lucide/vue'
@@ -35,25 +32,10 @@ const tools: ToolItem[] = [
     to: '/checklista-przed-wyjazdem',
   },
   {
-    title: 'Koszty podróży',
-    description: 'Oszacuj budżet wyjazdu, uwzględniając paliwo, opłaty i noclegi.',
-    icon: ReceiptText,
-  },
-  {
     title: 'Kalkulator spalania',
     description: 'Oblicz paliwo, koszt przejazdu i szacowaną liczbę tankowań.',
     icon: Fuel,
     to: '/kalkulator-spalania',
-  },
-  {
-    title: 'Kalkulator winiet',
-    description: 'Zaplanuj opłaty drogowe na trasie przez europejskie kraje.',
-    icon: Map,
-  },
-  {
-    title: 'Planer trasy',
-    description: 'Przygotuj trasę dopasowaną do samochodu i przyczepy.',
-    icon: Route,
   },
 ]
 
@@ -106,12 +88,32 @@ usePageSeo('home', {
           <p class="mt-5 max-w-xl text-base leading-7 text-white/80 sm:text-lg sm:leading-8">
             Kalkulatory, planery i przydatne narzędzia dla podróżujących z przyczepą kempingową.
           </p>
-          <Button as-child size="lg" class="mt-8 bg-emerald-700 text-white hover:bg-emerald-800">
-            <RouterLink to="/kalkulator-dmc">
-              Przejdź do kalkulatora DMC
-              <ArrowRight class="size-4" aria-hidden="true" />
+          <nav class="mt-8 flex items-center gap-3" aria-label="Szybki dost?p do narz?dzi">
+            <RouterLink
+              to="/kalkulator-dmc"
+              aria-label="Kalkulator DMC"
+              title="Kalkulator DMC"
+              class="flex size-12 items-center justify-center border border-white/20 bg-white/10 text-white transition-colors hover:bg-emerald-700"
+            >
+              <Weight class="size-5" aria-hidden="true" />
             </RouterLink>
-          </Button>
+            <RouterLink
+              to="/checklista-przed-wyjazdem"
+              aria-label="Checklista przed wyjazdem"
+              title="Checklista przed wyjazdem"
+              class="flex size-12 items-center justify-center border border-white/20 bg-white/10 text-white transition-colors hover:bg-emerald-700"
+            >
+              <ClipboardCheck class="size-5" aria-hidden="true" />
+            </RouterLink>
+            <RouterLink
+              to="/kalkulator-spalania"
+              aria-label="Kalkulator spalania"
+              title="Kalkulator spalania"
+              class="flex size-12 items-center justify-center border border-white/20 bg-white/10 text-white transition-colors hover:bg-emerald-700"
+            >
+              <Fuel class="size-5" aria-hidden="true" />
+            </RouterLink>
+          </nav>
         </div>
       </div>
       <div class="absolute bottom-0 right-0 hidden h-1.5 w-1/3 bg-emerald-600 sm:block" />
