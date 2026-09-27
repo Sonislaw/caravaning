@@ -11,4 +11,9 @@ export const routes: RouteRecordRaw[] = [
     name: 'kalkulator-dmc',
     component: () => import('@/views/tools/DmcCalculatorView.vue'),
   },
+  {
+    path: '/polityka-prywatnosci',
+    name: 'polityka-prywatnosci',
+    component: () => import('@/views/PrivacyPolicyView.vue'),
+  },
 ]

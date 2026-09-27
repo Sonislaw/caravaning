@@ -17,21 +17,18 @@ import { Caravan } from '@lucide/vue'
           Praktyczne narzędzia, które pomagają lepiej przygotować się do drogi i podróżować
           spokojniej.
         </p>
-        <p id="prywatnosc" class="mt-3 text-xs leading-5 text-muted-foreground">
+        <p class="mt-3 text-xs leading-5 text-muted-foreground">
           Dane wpisane do kalkulatorów są przetwarzane w przeglądarce i nie są zapisywane.
         </p>
       </div>
 
       <nav aria-label="Linki w stopce" class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
-        <a
-          href="mailto:kontakt@caravaning.tools"
-          class="text-muted-foreground hover:text-foreground"
-        >
+        <a href="mailto:kontakt@zgrana.pl" class="text-muted-foreground hover:text-foreground">
           Kontakt
         </a>
-        <a href="#prywatnosc" class="text-muted-foreground hover:text-foreground">
+        <RouterLink to="/polityka-prywatnosci" class="text-muted-foreground hover:text-foreground">
           Polityka prywatności
-        </a>
+        </RouterLink>
       </nav>
     </div>
     <div class="border-t border-border/70">

@@ -18,6 +18,14 @@
       "description": "Oblicz łączne DMC samochodu i przyczepy kempingowej. Zobacz, co oznacza wynik i dlaczego sama suma nie przesądza o wymaganej kategorii prawa jazdy.",
       "socialImage": "/og/kalkulator-dmc.png",
       "socialImageAlt": "Kalkulator DMC zestawu samochodu i przyczepy"
+    },
+    {
+      "key": "privacy",
+      "path": "/polityka-prywatnosci",
+      "title": "Polityka Prywatności - Caravaning Tools",
+      "description": "Polityka prywatności serwisu Caravaning Tools: informacje o danych technicznych, Cloudflare Web Analytics, plikach cookies i bezpieczeństwie.",
+      "socialImage": "/og/caravaning-tools.png",
+      "socialImageAlt": "Caravaning Tools"
     }
   ]
 }

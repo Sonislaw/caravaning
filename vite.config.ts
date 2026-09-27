@@ -24,6 +24,6 @@ const config: UserConfig & { ssgOptions: ViteSSGOptions } = {
 
 export default defineConfig(({ mode }) => {
   config.appType = mode === 'production' ? 'mpa' : 'spa'
-  config.ssgOptions.includedRoutes = () => ['/', '/kalkulator-dmc']
+  config.ssgOptions.includedRoutes = () => siteConfig.pages.map(({ path }) => path)
   return config
 })

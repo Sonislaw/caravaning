@@ -12,6 +12,10 @@ const imageCopy = {
     title: ['Kalkulator DMC', 'zestawu'],
     subtitle: 'Samochód + przyczepa kempingowa',
   },
+  privacy: {
+    title: ['Polityka', 'prywatności'],
+    subtitle: 'Prywatność w Caravaning Tools',
+  },
 }
 
 const xmlEscape = (value) =>

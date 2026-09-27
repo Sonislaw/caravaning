@@ -1,7 +1,7 @@
 import { useHead, useSeoMeta } from '@unhead/vue'
 import siteConfig from './site-config.json'
 
-export type SeoPageKey = 'home' | 'dmc'
+export type SeoPageKey = 'home' | 'dmc' | 'privacy'
 
 interface SitePageSeo {
   key: SeoPageKey
