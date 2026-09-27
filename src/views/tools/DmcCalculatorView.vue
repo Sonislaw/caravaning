@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { ArrowLeft, Caravan, RotateCcw, Scale } from '@lucide/vue'
+import { ArrowLeft, RotateCcw, Scale } from '@lucide/vue'
 import { RouterLink } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { siteName, siteUrl, usePageSeo } from '@/seo/usePageSeo'

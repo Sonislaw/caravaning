@@ -158,7 +158,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:px-8">
+  <div class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:px-8 lg:pb-10">
     <RouterLink
       to="/"
       class="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -231,7 +231,7 @@ onMounted(() => {
       <section
         aria-live="polite"
         aria-label="Postęp checklisty"
-        class="flex min-h-72 flex-col justify-between bg-[#17362f] p-6 text-white sm:p-8"
+        class="hidden self-start bg-[#17362f] p-6 text-white sm:p-8 lg:block"
       >
         <div class="flex items-center justify-between gap-4">
           <div>
@@ -247,7 +247,7 @@ onMounted(() => {
           </span>
         </div>
 
-        <div class="py-8">
+        <div class="py-6">
           <p class="font-heading text-5xl font-bold tabular-nums tracking-normal sm:text-6xl">
             {{ checkedCount }}
             <span class="text-2xl font-medium text-white/70 sm:text-3xl">/ {{ totalCount }}</span>
@@ -290,7 +290,30 @@ onMounted(() => {
       </section>
     </div>
 
-    <section class="mt-12 grid gap-8 border-t border-border pt-10 md:grid-cols-2">
+    <section
+      aria-live="polite"
+      aria-label="PostÄ™p checklisty"
+      class="fixed inset-x-0 bottom-0 z-40 border-t border-white/15 bg-[#17362f] px-4 py-3 text-white shadow-[0_-8px_24px_rgba(0,0,0,0.16)] lg:hidden"
+    >
+      <div class="mx-auto flex max-w-7xl items-center gap-3">
+        <ClipboardCheck class="size-5 shrink-0 text-emerald-100" aria-hidden="true" />
+        <p class="shrink-0 text-sm font-semibold tabular-nums">
+          {{ checkedCount }}<span class="text-white/70"> / {{ totalCount }}</span>
+        </p>
+        <div
+          class="h-2 min-w-0 flex-1 overflow-hidden rounded-full bg-white/15"
+          role="presentation"
+        >
+          <div
+            class="h-full rounded-full bg-emerald-300 transition-all"
+            :style="{ width: `${progressPercent}%` }"
+          />
+        </div>
+        <span class="shrink-0 text-xs tabular-nums text-emerald-100">{{ progressPercent }}%</span>
+      </div>
+    </section>
+
+    <section class="mt-12 grid gap-8 border-t border-border pt-10 md:grid-cols-2 lg:pb-0">
       <div>
         <h2 class="font-heading text-xl font-semibold tracking-normal">Jak korzystać z listy?</h2>
         <p class="mt-3 text-sm leading-6 text-muted-foreground">
