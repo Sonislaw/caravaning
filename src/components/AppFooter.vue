@@ -18,7 +18,8 @@ import { Caravan } from '@lucide/vue'
           spokojniej.
         </p>
         <p class="mt-3 text-xs leading-5 text-muted-foreground">
-          Dane wpisane do kalkulatorów są przetwarzane w przeglądarce i nie są zapisywane.
+          Dane wpisane do narzędzi są przetwarzane w przeglądarce. Stan checklisty może zostać
+          zapisany lokalnie na Twoim urządzeniu.
         </p>
       </div>
 

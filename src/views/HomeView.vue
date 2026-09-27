@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
 import { RouterLink } from 'vue-router'
-import { ArrowRight, Fuel, Map, ReceiptText, Route, ShieldCheck, Weight } from '@lucide/vue'
+import {
+  ArrowRight,
+  ClipboardCheck,
+  Fuel,
+  Map,
+  ReceiptText,
+  Route,
+  ShieldCheck,
+  Weight,
+} from '@lucide/vue'
 import { Button } from '@/components/ui/button'
 import { siteName, siteUrl, usePageSeo } from '@/seo/usePageSeo'
 
@@ -18,6 +27,12 @@ const tools: ToolItem[] = [
     description: 'Dodaj DMC samochodu i przyczepy, aby obliczyć łączną wartość zestawu.',
     icon: Weight,
     to: '/kalkulator-dmc',
+  },
+  {
+    title: 'Checklista przed wyjazdem',
+    description: 'Odznacz punkty przed podpięciem przyczepy, po zaczepieniu i tuż przed ruszeniem.',
+    icon: ClipboardCheck,
+    to: '/checklista-przed-wyjazdem',
   },
   {
     title: 'Koszty podróży',

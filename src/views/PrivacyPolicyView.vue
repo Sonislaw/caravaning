@@ -68,6 +68,11 @@ usePageSeo('privacy', {
           Dane te wykorzystywane są wyłącznie do celów statystycznych, analitycznych oraz poprawy
           działania serwisu.
         </p>
+        <p class="mt-3 text-sm leading-7 text-muted-foreground">
+          Checklista przed wyjazdem może zapisać odznaczone punkty w pamięci lokalnej przeglądarki
+          (localStorage) na urządzeniu użytkownika. Dane te nie są przesyłane na serwer i można je
+          usunąć, czyszcząc listę w narzędziu lub dane witryny w przeglądarce.
+        </p>
       </section>
 
       <section class="py-7">

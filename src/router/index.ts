@@ -17,6 +17,11 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/views/tools/FuelCalculatorView.vue'),
   },
   {
+    path: '/checklista-przed-wyjazdem',
+    name: 'checklista-przed-wyjazdem',
+    component: () => import('@/views/tools/DepartureChecklistView.vue'),
+  },
+  {
     path: '/polityka-prywatnosci',
     name: 'polityka-prywatnosci',
     component: () => import('@/views/PrivacyPolicyView.vue'),

@@ -16,6 +16,10 @@ const imageCopy = {
     title: ['Kalkulator', 'spalania'],
     subtitle: 'Paliwo, koszt trasy i tankowania',
   },
+  checklist: {
+    title: ['Checklista', 'przed wyjazdem'],
+    subtitle: 'Przyczepa, podpięcie i ostatnie sprawdzenie',
+  },
   privacy: {
     title: ['Polityka', 'prywatności'],
     subtitle: 'Prywatność w Caravaning Tools',
