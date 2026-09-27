@@ -127,19 +127,16 @@ usePageSeo('dmc', {
 </script>
 
 <template>
-  <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+  <div class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:px-8">
     <RouterLink
       to="/"
-      class="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      class="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
     >
       <ArrowLeft class="size-4" aria-hidden="true" />
       Wszystkie narzędzia
     </RouterLink>
 
     <div class="max-w-3xl">
-      <div class="flex size-12 items-center justify-center rounded-md bg-primary/10 text-primary">
-        <Caravan class="size-6" aria-hidden="true" />
-      </div>
       <p class="mt-6 text-sm font-semibold text-primary">Bezpiecznie zaplanuj zestaw</p>
       <h1 class="mt-2 font-heading text-3xl font-bold tracking-normal sm:text-4xl">
         Kalkulator DMC zestawu
