@@ -172,5 +172,51 @@ usePageSeo('home', {
         </div>
       </div>
     </section>
+
+    <section aria-labelledby="caravaning-guide-heading" class="border-t border-border bg-muted/20">
+      <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold text-primary">Praktyczny poradnik</p>
+          <h2 id="caravaning-guide-heading" class="mt-2 font-heading text-2xl font-bold tracking-normal sm:text-3xl">
+            Caravaning z przyczepa: zaplanuj podroz i przygotuj zestaw
+          </h2>
+          <p class="mt-5 text-sm leading-7 text-muted-foreground sm:text-base">
+            Podrozowanie z przyczepa kempingowa daje swobode wyboru trasy i miejsca postoju, ale wymaga
+            dobrego przygotowania samochodu oraz calego zestawu. Przed wyjazdem warto sprawdzic
+            dopuszczalne masy pojazdow, oszacowac zuzycie paliwa i przejsc przez najwazniejsze punkty
+            kontroli. Zebrane tu narzedzia pomagaja uporzadkowac te czynnosci przed ruszeniem w droge.
+          </p>
+        </div>
+        <div class="mt-8 grid gap-8 border-t border-border pt-8 md:grid-cols-3">
+          <article>
+            <h3 class="font-heading text-lg font-semibold tracking-normal">Sprawdz DMC samochodu i przyczepy</h3>
+            <p class="mt-3 text-sm leading-6 text-muted-foreground">
+              Dopuszczalna masa calkowita ma znaczenie przy doborze samochodu i planowaniu obciazenia.
+              Skorzystaj z <RouterLink to="/kalkulator-dmc" class="font-medium text-primary underline underline-offset-4">kalkulatora DMC</RouterLink>,
+              aby zestawic wartosci i ocenic parametry pojazdow. Porownaj wynik z danymi w dowodach
+              rejestracyjnych i wymaganiami dotyczacymi uprawnien kierowcy.
+            </p>
+          </article>
+          <article>
+            <h3 class="font-heading text-lg font-semibold tracking-normal">Oszacuj spalanie i koszt paliwa</h3>
+            <p class="mt-3 text-sm leading-6 text-muted-foreground">
+              Jazda z przyczepa moze zwiekszyc zuzycie paliwa, dlatego warto uwzglednic je w budzecie
+              wyjazdu. <RouterLink to="/kalkulator-spalania" class="font-medium text-primary underline underline-offset-4">Kalkulator spalania</RouterLink>
+              pomoze oszacowac ilosc potrzebnego paliwa, koszt przejazdu i liczbe tankowan na podstawie
+              planowanego dystansu oraz spalania zestawu.
+            </p>
+          </article>
+          <article>
+            <h3 class="font-heading text-lg font-semibold tracking-normal">Przejdz checkliste przed wyjazdem</h3>
+            <p class="mt-3 text-sm leading-6 text-muted-foreground">
+              Przed ruszeniem sprawdz zamkniecie okien i klap, zabezpieczenie wnetrza, zaczep,
+              polaczenie elektryczne oraz oswietlenie. <RouterLink to="/checklista-przed-wyjazdem" class="font-medium text-primary underline underline-offset-4">Checklista przed wyjazdem</RouterLink>
+              pozwala odhaczac kolejne punkty i zapisac postep w przegladarce, by wrocic do przygotowan
+              w dowolnym momencie.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
