@@ -10,19 +10,19 @@ const consumption = ref<number | string>('')
 const fuelPrice = ref<number | string>('')
 const tankCapacity = ref<number | string>('')
 
-const hasValidInputs = computed(() =>
-  [oneWayDistance.value, consumption.value, fuelPrice.value, tankCapacity.value].every(
-    (value) => Number(value) > 0,
-  ),
+const hasRequiredInputs = computed(() =>
+  [oneWayDistance.value, consumption.value, fuelPrice.value].every((value) => Number(value) > 0),
 )
+const hasTankCapacity = computed(() => Number(tankCapacity.value) > 0)
 
 const oneWayFuel = computed(() => (Number(oneWayDistance.value) * Number(consumption.value)) / 100)
 const roundTripFuel = computed(() => oneWayFuel.value * 2)
 const oneWayCost = computed(() => oneWayFuel.value * Number(fuelPrice.value))
 const roundTripCost = computed(() => oneWayCost.value * 2)
-const estimatedRefuels = computed(() =>
-  Math.max(Math.ceil(roundTripFuel.value / Number(tankCapacity.value)) - 1, 0),
-)
+const estimatedRefuels = computed(() => {
+  if (!hasTankCapacity.value || !hasRequiredInputs.value) return null
+  return Math.max(Math.ceil(roundTripFuel.value / Number(tankCapacity.value)) - 1, 0)
+})
 
 const numberFormatter = new Intl.NumberFormat('pl-PL', { maximumFractionDigits: 1 })
 const currencyFormatter = new Intl.NumberFormat('pl-PL', {
@@ -55,7 +55,12 @@ const frequentlyAskedQuestions = [
   {
     question: 'Jak kalkulator szacuje liczbę tankowań?',
     answer:
-      'Szacunek dotyczy trasy w obie strony, zakłada pełny bak na starcie oraz tankowanie dopiero po wykorzystaniu pojemności zbiornika. Nie uwzględnia rezerwy ani dostępności stacji.',
+      'Po podaniu opcjonalnej pojemności baku kalkulator szacuje tankowania dla trasy w obie strony, zakładając pełny bak na starcie. Wynik nie uwzględnia rezerwy ani dostępności stacji.',
+  },
+  {
+    question: 'Czy muszę podać pojemność baku?',
+    answer:
+      'Nie. Dystans, spalanie i cena paliwa wystarczą do obliczenia zużycia oraz kosztów. Pojemność baku jest potrzebna tylko do oszacowania liczby tankowań.',
   },
   {
     question: 'Czy wynik uwzględnia zmianę spalania podczas holowania?',
@@ -134,45 +139,49 @@ usePageSeo('consumption', {
         </div>
 
         <form class="mt-8 space-y-5" @submit.prevent>
-          <div class="space-y-2">
-            <label for="one-way-distance" class="text-sm font-medium">Dystans w jedną stronę</label>
-            <div class="relative">
-              <input
-                id="one-way-distance"
-                v-model.number="oneWayDistance"
-                type="number"
-                inputmode="decimal"
-                min="1"
-                step="1"
-                placeholder="np. 350"
-                class="h-12 w-full rounded-md border border-input bg-background px-4 pr-16 text-base tabular-nums outline-none transition-shadow placeholder:text-muted-foreground/60 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30"
-              />
-              <span
-                class="absolute inset-y-0 right-4 flex items-center text-sm text-muted-foreground"
+          <div class="grid gap-5 lg:grid-cols-2">
+            <div class="space-y-2">
+              <label for="one-way-distance" class="text-sm font-medium"
+                >Dystans w jedną stronę</label
               >
-                km
-              </span>
+              <div class="relative">
+                <input
+                  id="one-way-distance"
+                  v-model.number="oneWayDistance"
+                  type="number"
+                  inputmode="decimal"
+                  min="1"
+                  step="1"
+                  placeholder="np. 350"
+                  class="h-12 w-full rounded-md border border-input bg-background px-4 pr-16 text-base tabular-nums outline-none transition-shadow placeholder:text-muted-foreground/60 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30"
+                />
+                <span
+                  class="absolute inset-y-0 right-4 flex items-center text-sm text-muted-foreground"
+                >
+                  km
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div class="space-y-2">
-            <label for="fuel-consumption" class="text-sm font-medium">Średnie spalanie</label>
-            <div class="relative">
-              <input
-                id="fuel-consumption"
-                v-model.number="consumption"
-                type="number"
-                inputmode="decimal"
-                min="0.1"
-                step="0.1"
-                placeholder="np. 8,5"
-                class="h-12 w-full rounded-md border border-input bg-background px-4 pr-24 text-base tabular-nums outline-none transition-shadow placeholder:text-muted-foreground/60 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30"
-              />
-              <span
-                class="absolute inset-y-0 right-4 flex items-center text-sm text-muted-foreground"
-              >
-                l/100 km
-              </span>
+            <div class="space-y-2">
+              <label for="fuel-consumption" class="text-sm font-medium">Średnie spalanie</label>
+              <div class="relative">
+                <input
+                  id="fuel-consumption"
+                  v-model.number="consumption"
+                  type="number"
+                  inputmode="decimal"
+                  min="0.1"
+                  step="0.1"
+                  placeholder="np. 8,5"
+                  class="h-12 w-full rounded-md border border-input bg-background px-4 pr-24 text-base tabular-nums outline-none transition-shadow placeholder:text-muted-foreground/60 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30"
+                />
+                <span
+                  class="absolute inset-y-0 right-4 flex items-center text-sm text-muted-foreground"
+                >
+                  l/100 km
+                </span>
+              </div>
             </div>
           </div>
 
@@ -199,7 +208,9 @@ usePageSeo('consumption', {
             </div>
 
             <div class="space-y-2">
-              <label for="tank-capacity" class="text-sm font-medium">Pojemność baku</label>
+              <label for="tank-capacity" class="text-sm font-medium">
+                Pojemność baku <span class="font-normal text-muted-foreground">(opcjonalnie)</span>
+              </label>
               <div class="relative">
                 <input
                   id="tank-capacity"
@@ -217,13 +228,16 @@ usePageSeo('consumption', {
                   l
                 </span>
               </div>
+              <p class="text-xs leading-5 text-muted-foreground">
+                Potrzebna tylko do oszacowania liczby tankowań.
+              </p>
             </div>
           </div>
         </form>
 
         <p class="mt-6 border-t border-border pt-5 text-xs leading-5 text-muted-foreground">
-          Liczba tankowań zakłada pełny bak na starcie. Rzeczywisty wynik zależy od warunków jazdy,
-          obciążenia, rezerwy paliwa i dostępności stacji.
+          Jeśli podasz pojemność baku, szacunek tankowań założy pełny bak na starcie. Rzeczywisty
+          wynik zależy od warunków jazdy, obciążenia, rezerwy paliwa i dostępności stacji.
         </p>
       </section>
 
@@ -246,13 +260,13 @@ usePageSeo('consumption', {
 
         <div class="py-7">
           <p
-            v-if="hasValidInputs"
+            v-if="hasRequiredInputs"
             class="font-heading text-5xl font-bold tabular-nums tracking-normal sm:text-6xl"
           >
             {{ formatCurrency(roundTripCost) }}
           </p>
           <p v-else class="max-w-xs text-base leading-7 text-white/70">
-            Uzupełnij wszystkie pola, aby zobaczyć wyniki.
+            Uzupełnij dystans, spalanie i cenę paliwa, aby zobaczyć wyniki.
           </p>
         </div>
 
@@ -260,32 +274,35 @@ usePageSeo('consumption', {
           <div>
             <p class="text-xs font-semibold uppercase text-emerald-100">Paliwo, jedna strona</p>
             <p class="mt-1 text-lg font-semibold tabular-nums">
-              {{ hasValidInputs ? `${formatNumber(oneWayFuel)} l` : '—' }}
+              {{ hasRequiredInputs ? `${formatNumber(oneWayFuel)} l` : '—' }}
             </p>
           </div>
           <div>
             <p class="text-xs font-semibold uppercase text-emerald-100">Koszt, jedna strona</p>
             <p class="mt-1 text-lg font-semibold tabular-nums">
-              {{ hasValidInputs ? formatCurrency(oneWayCost) : '—' }}
+              {{ hasRequiredInputs ? formatCurrency(oneWayCost) : '—' }}
             </p>
           </div>
           <div>
             <p class="text-xs font-semibold uppercase text-emerald-100">Dystans łącznie</p>
             <p class="mt-1 text-lg font-semibold tabular-nums">
-              {{ hasValidInputs ? `${formatNumber(Number(oneWayDistance) * 2)} km` : '—' }}
+              {{ hasRequiredInputs ? `${formatNumber(Number(oneWayDistance) * 2)} km` : '—' }}
             </p>
           </div>
           <div>
             <p class="text-xs font-semibold uppercase text-emerald-100">Tankowania</p>
             <p class="mt-1 text-lg font-semibold tabular-nums">
-              {{ hasValidInputs ? estimatedRefuels : '—' }}
+              {{ estimatedRefuels ?? '—' }}
+            </p>
+            <p v-if="hasRequiredInputs && !hasTankCapacity" class="mt-1 text-xs text-white/60">
+              Podaj pojemność baku
             </p>
           </div>
         </div>
 
         <p class="mt-auto border-t border-white/20 pt-5 text-xs leading-5 text-white/70">
           Szacowane zużycie paliwa w obie strony:
-          {{ hasValidInputs ? `${formatNumber(roundTripFuel)} l` : '—' }}.
+          {{ hasRequiredInputs ? `${formatNumber(roundTripFuel)} l` : '—' }}.
         </p>
       </section>
     </div>
