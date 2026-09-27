@@ -7,6 +7,7 @@ import { siteName, siteUrl, usePageSeo } from '@/seo/usePageSeo'
 
 const oneWayDistance = ref<number | string>('')
 const consumption = ref<number | string>('')
+const includeTrailerConsumption = ref(false)
 const fuelPrice = ref<number | string>('')
 const tankCapacity = ref<number | string>('')
 
@@ -14,8 +15,11 @@ const hasRequiredInputs = computed(() =>
   [oneWayDistance.value, consumption.value, fuelPrice.value].every((value) => Number(value) > 0),
 )
 const hasTankCapacity = computed(() => Number(tankCapacity.value) > 0)
+const effectiveConsumption = computed(
+  () => Number(consumption.value) * (includeTrailerConsumption.value ? 1.2 : 1),
+)
 
-const oneWayFuel = computed(() => (Number(oneWayDistance.value) * Number(consumption.value)) / 100)
+const oneWayFuel = computed(() => (Number(oneWayDistance.value) * effectiveConsumption.value) / 100)
 const roundTripFuel = computed(() => oneWayFuel.value * 2)
 const oneWayCost = computed(() => oneWayFuel.value * Number(fuelPrice.value))
 const roundTripCost = computed(() => oneWayCost.value * 2)
@@ -37,6 +41,7 @@ const formatCurrency = (value: number) => currencyFormatter.format(value)
 const resetCalculator = () => {
   oneWayDistance.value = ''
   consumption.value = ''
+  includeTrailerConsumption.value = false
   fuelPrice.value = ''
   tankCapacity.value = ''
 }
@@ -63,9 +68,9 @@ const frequentlyAskedQuestions = [
       'Nie. Dystans, spalanie i cena paliwa wystarczą do obliczenia zużycia oraz kosztów. Pojemność baku jest potrzebna tylko do oszacowania liczby tankowań.',
   },
   {
-    question: 'Czy wynik uwzględnia zmianę spalania podczas holowania?',
+    question: 'Czy kalkulator uwzględnia spalanie z przyczepą?',
     answer:
-      'Nie. Wpisz średnie spalanie odpowiadające planowanej podróży. Rzeczywiste zużycie zależy między innymi od prędkości, obciążenia, pogody, trasy i holowanej przyczepy.',
+      'Tak. Zaznacz opcję uwzględnienia przyczepy, a kalkulator doliczy do podanego średniego spalania 20%. To szacunek — rzeczywista różnica zależy między innymi od prędkości, obciążenia, pogody, trasy i przyczepy.',
   },
 ]
 
@@ -185,6 +190,24 @@ usePageSeo('consumption', {
             </div>
           </div>
 
+          <label
+            for="trailer-consumption-uplift"
+            class="flex cursor-pointer items-start gap-3 border border-border bg-muted/20 p-3"
+          >
+            <input
+              id="trailer-consumption-uplift"
+              v-model="includeTrailerConsumption"
+              type="checkbox"
+              class="mt-1 size-4 shrink-0 accent-[#315848]"
+            />
+            <span>
+              <span class="block text-sm font-medium">Uwzględnij spalanie z przyczepą (+20%)</span>
+              <span class="mt-1 block text-xs leading-5 text-muted-foreground">
+                Dodamy 20% do podanego średniego spalania.
+              </span>
+            </span>
+          </label>
+
           <div class="grid gap-5 sm:grid-cols-2">
             <div class="space-y-2">
               <label for="fuel-price" class="text-sm font-medium">Cena paliwa</label>
@@ -290,6 +313,14 @@ usePageSeo('consumption', {
             </p>
           </div>
           <div>
+            <p class="text-xs font-semibold uppercase text-emerald-100">
+              {{ includeTrailerConsumption ? 'Spalanie z narzutem' : 'Spalanie bazowe' }}
+            </p>
+            <p class="mt-1 text-lg font-semibold tabular-nums">
+              {{ hasRequiredInputs ? `${formatNumber(effectiveConsumption)} l/100 km` : '—' }}
+            </p>
+          </div>
+          <div>
             <p class="text-xs font-semibold uppercase text-emerald-100">Tankowania</p>
             <p class="mt-1 text-lg font-semibold tabular-nums">
               {{ estimatedRefuels ?? '—' }}
@@ -314,7 +345,8 @@ usePageSeo('consumption', {
       <p class="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
         Zużycie paliwa to dystans pomnożony przez średnie spalanie i podzielony przez 100. Koszt
         przejazdu wynika z pomnożenia zużycia przez cenę litra. Wynik w obie strony zakłada ten sam
-        dystans i spalanie w drodze powrotnej.
+        dystans i spalanie w drodze powrotnej. Opcja przyczepy dodaje do spalania bazowego narzut
+        20%.
       </p>
       <p class="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
         Szacowana liczba tankowań zakłada pełny bak na starcie i tankowanie po wykorzystaniu
