@@ -32,7 +32,7 @@ usePageSeo('privacy', {
       </h1>
       <p class="mt-3 text-sm text-muted-foreground">
         Data obowiązywania:
-        <time datetime="2026-09-27">27 września 2026 r.</time>
+        <time datetime="2026-09-28">28 września 2026 r.</time>
       </p>
     </header>
 
@@ -76,58 +76,51 @@ usePageSeo('privacy', {
       </section>
 
       <section class="py-7">
-        <h2 class="font-heading text-xl font-semibold tracking-normal">
-          3. Cloudflare Web Analytics
-        </h2>
+        <h2 class="font-heading text-xl font-semibold tracking-normal">3. Google Analytics</h2>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Serwis korzysta z usługi Cloudflare Web Analytics dostarczanej przez Cloudflare, Inc.
+          Za Twoją zgodą serwis korzysta z Google Analytics 4, dostarczanego przez Google. Narzędzie
+          pomaga administratorowi analizować korzystanie ze strony i ulepszać jej działanie.
         </p>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Cloudflare Web Analytics służy do analizy ruchu na stronie internetowej oraz monitorowania
-          jej wydajności. Według dokumentacji producenta rozwiązanie to zostało zaprojektowane w
-          sposób uwzględniający prywatność użytkowników i nie wykorzystuje plików cookies,
-          localStorage ani technik fingerprintingu do celów analitycznych.
+          Skrypt Google Analytics nie jest ładowany przed wyrażeniem zgody na pliki cookie
+          analityczne. Po akceptacji Google Analytics może wykorzystywać pliki cookie i przetwarzać
+          informacje techniczne, takie jak adres IP, informacje o urządzeniu i przeglądarce oraz
+          sposób korzystania z serwisu.
         </p>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Cloudflare wskazuje również, że Web Analytics nie służy do śledzenia użytkowników pomiędzy
-          stronami internetowymi ani do tworzenia profili użytkowników.
-        </p>
-        <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Dane statystyczne prezentowane są administratorowi w postaci zbiorczych raportów i służą
-          wyłącznie do analizy popularności treści oraz jakości działania serwisu.
+          Dane statystyczne służą do analizy popularności treści i jakości działania serwisu.
+          Więcej informacji o przetwarzaniu danych przez Google znajduje się w
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer" class="font-medium text-primary underline underline-offset-4">polityce prywatności Google</a>.
         </p>
       </section>
 
       <section class="py-7">
         <h2 class="font-heading text-xl font-semibold tracking-normal">4. Pliki cookies</h2>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Strona nie wykorzystuje plików cookies do celów analitycznych realizowanych przez
-          Cloudflare Web Analytics.
+          Serwis prosi o zgodę przed użyciem plików cookie analitycznych Google Analytics. Możesz
+          zaakceptować lub odrzucić analitykę w pasku zgody. Wybór jest zapisywany lokalnie w
+          przeglądarce, aby nie wyświetlać pytania przy każdej wizycie.
         </p>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Niezależnie od powyższego infrastruktura Cloudflare może wykorzystywać techniczne pliki
-          cookies niezbędne do zapewnienia bezpieczeństwa, ochrony przed nadużyciami lub
-          prawidłowego działania usług sieciowych. Szczegółowe informacje znajdują się w
-          dokumentacji Cloudflare.
+          Możesz zmienić wybór przez usunięcie danych witryny w ustawieniach przeglądarki. Po
+          ponownym otwarciu strony pasek zgody pojawi się ponownie.
         </p>
       </section>
 
       <section class="py-7">
         <h2 class="font-heading text-xl font-semibold tracking-normal">5. Odbiorcy danych</h2>
+        <p class="mt-3 text-sm leading-7 text-muted-foreground">Dostawcami usług technicznych mogą być podmiot hostujący serwis oraz, po wyrażeniu zgody analitycznej, Google.</p>
         <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Dostawcą infrastruktury technicznej oraz narzędzia analitycznego jest Cloudflare, Inc.
-        </p>
-        <p class="mt-3 text-sm leading-7 text-muted-foreground">
-          Informacje dotyczące sposobu przetwarzania danych przez Cloudflare można znaleźć na
+          Informacje dotyczące sposobu przetwarzania danych przez Google można znaleźć na
           stronie:
         </p>
         <a
-          href="https://www.cloudflare.com/privacypolicy"
+          href="https://policies.google.com/privacy"
           target="_blank"
           rel="noreferrer"
           class="mt-2 inline-flex break-all text-sm font-medium text-primary underline underline-offset-4"
         >
-          https://www.cloudflare.com/privacypolicy
+          https://policies.google.com/privacy
         </a>
       </section>
 

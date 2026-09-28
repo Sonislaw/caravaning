@@ -3,6 +3,7 @@ import { useHead } from '@unhead/vue'
 import { RouterView } from 'vue-router'
 import AppFooter from '@/components/AppFooter.vue'
 import AppHeader from '@/components/AppHeader.vue'
+import CookieConsentBanner from '@/components/CookieConsentBanner.vue'
 
 useHead({ htmlAttrs: { lang: 'pl' } })
 </script>
@@ -14,5 +15,6 @@ useHead({ htmlAttrs: { lang: 'pl' } })
       <RouterView />
     </main>
     <AppFooter />
+    <CookieConsentBanner />
   </div>
 </template>
